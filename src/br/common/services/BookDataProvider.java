@@ -1,9 +1,7 @@
 package br.common.services;
 
-import br.common.db.Database;
-import br.common.db.DbConfig;
+import br.common.db.DatabaseHelper;
 import br.common.db.QueryBuilder;
-import br.common.db.QueryExecutor;
 import br.common.models.Book;
 import br.common.models.Books;
 import br.common.utils.StreamUtil;
@@ -21,7 +19,7 @@ public class BookDataProvider {
 
     public String getAllBooks() {
         QueryBuilder query = new QueryBuilder.Builder().select("*").table("Book").build();
-        Books booksObj = (Books) new QueryExecutor().execute(query);
+        Books booksObj = (Books) DatabaseHelper.getInstance().execute(query);
 
         OutputStream os = new XmlWriter<Books>(booksObj).writeToXml();
         String responseXml = StreamUtil.convertStreamToString(os);

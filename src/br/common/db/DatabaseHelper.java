@@ -3,31 +3,28 @@ package br.common.db;
 import br.common.models.Book;
 import br.common.models.Books;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database {
-    private String dbDriver = DbConfig.DB_DRIVER;
-    private String dbUrl = DbConfig.DB_URL;
-    private String username = DbConfig.DB_USERNAME;
-    private String password = DbConfig.DB_PASSWORD;
-    private Connection connection = null;
+public class DatabaseHelper {
+    private static DatabaseHelper instance = new DatabaseHelper();
+    private static DbConnection dbConnection = new DbConnection();
 
-    private static Database instance = new Database();
-
-    private Database() {
+    private DatabaseHelper() {
     }
 
-    public static Database getInstance() {
+    public static DatabaseHelper getInstance() {
         return instance;
     }
 
-    public Books executeQuery(QueryBuilder queryBuilder) {
+    public Books execute(QueryBuilder queryBuilder) {
         Books books = null;
         ResultSet rs = null;
         try {
-            Statement statement = getConnection().createStatement();
+            Statement statement = dbConnection.open().createStatement();
             rs = statement.executeQuery(queryBuilder.getQueryString());
             books = formBookObjFromResultSet(rs);
         } catch (SQLException e) {
@@ -35,7 +32,7 @@ public class Database {
         } finally {
             try {
                 rs.close();
-                closeConnection();
+                dbConnection.close();
             } catch (SQLException se) {
             }
         }
@@ -63,31 +60,5 @@ public class Database {
 
         books.setBooksList(list);
         return books;
-    }
-
-    private Connection getConnection() {
-        try {
-            Class.forName(dbDriver);
-            connection = DriverManager.getConnection(dbUrl, username, password);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Connection opened!");
-
-        return connection;
-    }
-
-    private void closeConnection() {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("Connection closed!");
     }
 }

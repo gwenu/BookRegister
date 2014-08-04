@@ -8,19 +8,21 @@ public class SystemConfig {
     private static final String CONFIG_PATH = "config.properties";
     private static SystemConfig instance = new SystemConfig();
 
+    private Properties properties = new Properties();
+
     private SystemConfig() {
+        loadConfig(properties);
     }
 
     public static SystemConfig getInstance() {
         return instance;
     }
 
-    public Properties getConfig() {
-        return instance.getLoadedConfig();
+    public Properties getProperties() {
+        return properties;
     }
 
-    private Properties getLoadedConfig() {
-        Properties properties = new Properties();
+    private void loadConfig(Properties properties) {
         InputStream input = null;
 
         try {
@@ -28,7 +30,6 @@ public class SystemConfig {
 
             if (input == null) {
                 System.out.println("Can not load " + CONFIG_PATH);
-                return null;
             }
 
             properties.load(input);
@@ -44,7 +45,5 @@ public class SystemConfig {
                 }
             }
         }
-
-        return properties;
     }
 }

@@ -1,7 +1,11 @@
 package br.common.db;
 
 public class QueryBuilder {
+    private String createArg;
     private String selectArg;
+    private String deleteArgs;
+    private String insertArgs;
+    private String updateArgs;
     private String tableArg;
     private String whereArg;
 
