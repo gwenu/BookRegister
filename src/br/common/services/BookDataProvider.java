@@ -6,18 +6,22 @@ import br.common.models.Book;
 import br.common.models.Books;
 import br.common.utils.StreamUtil;
 import br.common.utils.XmlWriter;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookDataProvider {
+    final Logger logger = Logger.getLogger(BookDataProvider.class.getName());
 
     public BookDataProvider() {
 
     }
 
     public String getAllBooks() {
+        logger.debug("Inside getAllBooks");
         QueryBuilder query = new QueryBuilder.Builder().select("*").table("Book").build();
         Books booksObj = (Books) DatabaseHelper.getInstance().execute(query);
 
@@ -27,8 +31,6 @@ public class BookDataProvider {
     }
 
     public Book getBookById(Long id) {
-
-
         return new Book();
     }
 
