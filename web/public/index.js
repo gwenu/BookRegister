@@ -1,5 +1,3 @@
-var errors = $("#errors");
-
 function request(parameters) {
     $.ajax({
         url: parameters.url,
@@ -12,7 +10,7 @@ function request(parameters) {
         },
         error: function (error) {
             console.log("Error");
-            errors.text("Something go wrong!/n" + error);
+            $("#errors").text("Something go wrong with ajax!");
         }
     });
 };
@@ -24,14 +22,14 @@ function validateAndGetParams() {
     var requestBody = $("#request").val();
 
     if(method == "GET" && !url) {
-        errors.text("Url is missing. Please provide correct url!");
-        errors.show();
+        $("#errors").text("Url is missing. Please provide correct url!");
+        return false;
     }
 
 
     if(method == "POST" && !url && !parameters) {
-        errors.text("Url or parameters are missing. Please provide correct url and parameters!");
-        errors.show();
+        $("#errors").text("Url or parameters are missing. Please provide correct url and parameters!");
+        return false;
     }
 
     return {
@@ -44,5 +42,7 @@ function validateAndGetParams() {
 
 function send() {
     var parameters = validateAndGetParams();
-    request(parameters);
+    if(parameters) {
+        request(parameters);
+    }
 };

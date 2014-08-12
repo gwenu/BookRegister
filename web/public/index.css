@@ -1,10 +1,28 @@
 #errors {
+    height: 2%;
+    margin: 5px;
     color: red;
 }
 
 #requestXml,
 #responseXml{
     display: inline-block;
-    width: 50%;
+    width: 45%;
+    height: 50%;
     float: left;
+    margin: 1%;
+}
+
+#requestXml textarea,
+#responseXml textarea{
+    display: inline-block;
+    width: 70%;
+    height: 100%;
+    float: left;
+    padding: 10px;
+    border: 2px inset;
+}
+
+#request-method {
+    margin-left: 20px;
 }
