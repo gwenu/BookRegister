@@ -1,0 +1,10 @@
+#errors {
+    color: red;
+}
+
+#requestXml,
+#responseXml{
+    display: inline-block;
+    width: 50%;
+    float: left;
+}
