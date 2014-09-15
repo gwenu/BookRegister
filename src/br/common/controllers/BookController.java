@@ -15,8 +15,9 @@ import java.io.PrintWriter;
         description = "Book Servlet",
         urlPatterns = {"/books"})
 public class BookController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String responseXml = new BookDataProvider().getAllBooks();
 
         response.setStatus(200);

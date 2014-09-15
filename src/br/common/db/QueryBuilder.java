@@ -31,7 +31,7 @@ public class QueryBuilder {
             return this;
         }
 
-        public Builder table(String arg) {
+        public Builder fromTable(String arg) {
             tableArg = arg;
             return this;
         }
