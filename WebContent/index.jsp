@@ -12,7 +12,7 @@
     <div id="params">
         <div>
             <label>Request Method</label>
-            <select id="request-method" name="request-method" style="margin-left: 20px;"">
+            <select id="request-method" name="request-method"">
             <option value="GET">GET</option>
             <option value="POST">POST</option>
             <%--<option value="PUT">PUT</option>--%>
@@ -33,10 +33,10 @@
     <div id="errors"></div>
 
     <div id="requestXml">
-        <textarea name="request" id="request" cols="40" rows="20"></textarea>
+        <textarea name="request" id="request"></textarea>
     </div>
     <div id="responseXml">
-        <textarea name="response" id="response" cols="40" rows="20"></textarea>
+        <textarea name="response" id="response"></textarea>
     </div>
 </body>
 </html>
