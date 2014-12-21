@@ -1,17 +1,17 @@
 package br.common.services;
 
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import br.common.db.DatabaseHelper;
 import br.common.db.QueryBuilder;
 import br.common.models.Book;
 import br.common.models.Books;
 import br.common.utils.StreamUtil;
 import br.common.utils.XmlWriter;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookDataProvider {
     final Logger logger = Logger.getLogger(BookDataProvider.class.getName());

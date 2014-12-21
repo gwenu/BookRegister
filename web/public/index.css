@@ -1,3 +1,9 @@
+#content {
+    width: 90%;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+
 #errors {
     height: 2%;
     margin: 5px;
@@ -15,14 +21,5 @@
 
 #requestXml textarea,
 #responseXml textarea{
-    display: inline-block;
-    width: 70%;
     height: 100%;
-    float: left;
-    padding: 10px;
-    border: 2px inset;
-}
-
-#request-method {
-    margin-left: 20px;
 }

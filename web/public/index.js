@@ -5,6 +5,7 @@ function request(parameters) {
         data: parameters.requestBody,
         dataType: "xml",
         success: function (data) {
+        	$("#errors").text("");
             var xmlTextArea = $("#response");
             xmlTextArea.val((new XMLSerializer()).serializeToString(data));
         },
