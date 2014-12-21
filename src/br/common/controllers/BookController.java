@@ -16,7 +16,7 @@ import br.common.services.BookDataProvider;
         description = "Book Servlet",
         urlPatterns = {"/books"})
 public class BookController extends HttpServlet {
-	private static final long serialVersionUID = 3341104474037671351L;
+	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String responseXml = new BookDataProvider().getAllBooks();

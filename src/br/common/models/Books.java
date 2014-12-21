@@ -19,4 +19,9 @@ public class Books extends Model{
     public void setBooksList(List<Book> booksList) {
         this.booksList = booksList;
     }
+
+    public Book getFirstBook() {
+        Book book = booksList.get(0);
+        return  book;
+    }
 }

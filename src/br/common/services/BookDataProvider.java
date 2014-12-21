@@ -21,8 +21,7 @@ public class BookDataProvider {
     }
 
     public String getAllBooks() {
-        logger.debug("Inside getAllBooks");
-        QueryBuilder query = new QueryBuilder.Builder().select("*").table("Book").build();
+        QueryBuilder query = new QueryBuilder.Builder().select("*").fromTable("Book").build();
         Books booksObj = (Books) DatabaseHelper.getInstance().execute(query);
 
         OutputStream os = new XmlWriter<Books>(booksObj).writeToXml();
@@ -31,6 +30,8 @@ public class BookDataProvider {
     }
 
     public Book getBookById(Long id) {
+        QueryBuilder query = new QueryBuilder.Builder().select("*").fromTable("Book").where("id=" + id).build();
+        Book result = ((Books) DatabaseHelper.getInstance().execute(query)).getFirstBook();
         return new Book();
     }
 
