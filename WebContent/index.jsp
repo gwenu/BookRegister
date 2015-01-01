@@ -30,8 +30,12 @@
 				<label for="inputPassword3" class="col-sm-2 control-label">Request
 					URL</label>
 				<div class="col-sm-10">
-					<input type="text" id="url" class="form-control" value=""
-						name="url" />
+				<select id="url" name="url" class="form-control">
+					<option value="http://localhost:8080/BookRegister/book/all">http://localhost:8080/BookRegister/book/all</option>
+					<option value="http://localhost:8080/BookRegister/book">http://localhost:8080/BookRegister/book</option>
+					<%--<option value="PUT">PUT</option>--%>
+					<%--<option value="DELETE">DELETE</option>--%>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">

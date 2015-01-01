@@ -18,7 +18,7 @@ function request(parameters) {
 
 function validateAndGetParams() {
     var method = $("select[name='request-method']").val();
-    var url = $("#url").val();
+    var url = $("select[name='url']").val();
     var parameters = $("#parameters").val();
     var requestBody = $("#request").val();
 
@@ -32,14 +32,18 @@ function validateAndGetParams() {
         $("#errors").text("Url or parameters are missing. Please provide correct url and parameters!");
         return false;
     }
-
+    
     return {
-        url: url,
+        url: formUrl(url, parameters),
         method: method,
         parameters: parameters,
         requestBody: requestBody
     };
 };
+
+function formUrl(url, parameters){
+	return url + "?" + parameters.replace(",", "&");
+}
 
 function send() {
     var parameters = validateAndGetParams();
