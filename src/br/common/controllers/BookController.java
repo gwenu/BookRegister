@@ -38,6 +38,7 @@ public class BookController extends HttpServlet {
 		Map<String, String[]> paremeters = request.getParameterMap();
 		BookRepository bookRepository = new BookRepository();
 		
+		// TODO: some kind of factory to produce xmlResponse
 		if (requestUri.contains("book/all")) {
 			XmlResponse<Books> xmlResponse = new XmlResponse<Books>();
 			Books books = bookRepository.getAllBooks();

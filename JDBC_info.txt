@@ -1,0 +1,81 @@
+
+### Connecting with DriverManager Class
+
+	<code>
+		// For example: jdbc:mysql://localhost:3306/
+		Connection conn = DriverManager.getConnection("jdbc:" + this.dbms + 
+													  "://" + this.serverName +
+                   									  ":" + this.portNumber + 
+                   									  "/", connectionProps);
+	</code>
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+### Connecting with DataSource Objects
+
+Advantage: no longer have to hard code the driver name or JDBC URL in their applications, 
+			which makes them more portable.
+			
+# Using DataSource Objects to Get a Connection
+
+	<code>
+		DataSource ds = new MysqlDataSource();
+    	ds.getConnection();
+    </code>
+   
+    
+# Creating Instance of DataSource Class and Setting its Properties
+
+	<code>
+		com.dbaccess.BasicDataSource ds = new com.dbaccess.BasicDataSource();
+		ds.setServerName("grinder");
+		ds.setDatabaseName("CUSTOMER_ACCOUNTS");
+		ds.setDescription("Customer accounts database for billing");
+	</code>
+
+	
+# Registering DataSource Object with Naming Service That Uses JNDI API
+
+	<code>
+		Context ctx = new InitialContext();
+		ctx.bind("jdbc/billingDB", ds);			// Bind
+		
+		Context ctx = new InitialContext();
+		DataSource ds = (DataSource)ctx.lookup("jdbc/billingDB");			// Use
+	</code>
+	
+# Configure connection pool
+
+    // Define
+	<code>
+		com.dbaccess.ConnectionPoolDS cpds = new com.dbaccess.ConnectionPoolDS();
+		cpds.setServerName("creamer");
+		cpds.setDatabaseName("COFFEEBREAK");
+		cpds.setPortNumber(9040);
+		cpds.setDescription("Connection pooling for " + "COFFEEBREAK DBMS");
+		
+		Context ctx = new InitialContext();
+		ctx.bind("jdbc/pool/fastCoffeeDB", cpds);
+
+		com.applogic.PooledDataSource ds = new com.applogic.PooledDataSource();
+		ds.setDescription("produces pooled connections to COFFEEBREAK");
+		ds.setDataSourceName("jdbc/pool/fastCoffeeDB");
+		Context ctx = new InitialContext();
+		ctx.bind("jdbc/fastCoffeeDB", ds);
+	</code>
+	
+	//Use
+	<code>
+		ctx = new InitialContext();
+		ds = (DataSource)ctx.lookup("jdbc/fastCoffeeDB");
+	</code>
+	
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+### Deploying Distributed Transactions
+
+
+
+
+
+		

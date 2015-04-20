@@ -1,5 +1,7 @@
 package br.common.db;
 
+
+// TODO: prepared statements
 public class QueryBuilder {
     private String createArg;
     private String selectArg;
