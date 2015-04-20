@@ -17,7 +17,7 @@ import br.common.utils.XmlResponse;
 
 @WebServlet(
 		description = "Book Servlet", 
-		urlPatterns = { "/book" })
+		urlPatterns = { "/book/*" })
 public class BookController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

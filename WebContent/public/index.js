@@ -42,7 +42,12 @@ function validateAndGetParams() {
 };
 
 function formUrl(url, parameters){
-	return url + "?" + parameters.replace(",", "&");
+	var formedUrl = url;
+	
+	if(parameters) {
+		formedUrl += "?" + parameters.replace(",", "&");
+	}
+	return formedUrl; 
 }
 
 function send() {
