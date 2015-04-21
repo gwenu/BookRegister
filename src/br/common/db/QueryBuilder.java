@@ -1,22 +1,27 @@
 package br.common.db;
 
+import org.apache.log4j.Logger;
 
-// TODO: prepared statements
 public class QueryBuilder {
-    private String createArg;
+	
+	private static Logger logger = Logger.getLogger(QueryBuilder.class);
+	
     private String selectArg;
-    private String deleteArgs;
-    private String insertArgs;
-    private String updateArgs;
     private String tableArg;
     private String whereArg;
+//    private String createArg;
+//    private String deleteArgs;
+//    private String insertArgs;
+//    private String updateArgs;
 
     public String getQueryString() {
         StringBuilder strBuilder = new StringBuilder();
-        strBuilder.append("SELECT " + selectArg);
-        strBuilder.append("FROM " + tableArg);
-//        strBuilder.append("");
-        return strBuilder.toString();
+        strBuilder.append(selectArg != null ? ("SELECT " + selectArg) : "");
+        strBuilder.append(tableArg != null ? (" FROM " + tableArg) : "");
+        strBuilder.append(whereArg != null ? (" WHERE " + whereArg) : "");
+        
+        logger.info("[QueryBuilder.getQueryString()] SQL query: " + strBuilder.toString());
+        return strBuilder.toString().trim();
     }
 
     public static class Builder {
@@ -33,7 +38,7 @@ public class QueryBuilder {
             return this;
         }
 
-        public Builder fromTable(String arg) {
+        public Builder inTable(String arg) {
             tableArg = arg;
             return this;
         }
