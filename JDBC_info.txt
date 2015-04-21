@@ -74,7 +74,32 @@ Advantage: no longer have to hard code the driver name or JDBC URL in their appl
 
 ### Deploying Distributed Transactions
 
+A distributed transaction is a transaction that accesses and updates data on two or more networked resources.
 
+	// Define
+	<code>
+		com.dbaccess.XATransactionalDS xads = new com.dbaccess.XATransactionalDS();
+		xads.setServerName("creamer");
+		xads.setDatabaseName("COFFEEBREAK");
+		xads.setPortNumber(9040);
+		xads.setDescription("Distributed transactions for COFFEEBREAK DBMS");
+		
+		Context ctx = new InitialContext();
+		ctx.bind("jdbc/xa/distCoffeeDB", xads);
+		
+		com.applogic.TransactionalDS ds = new com.applogic.TransactionalDS();
+		ds.setDescription("Produces distributed transaction connections to COFFEEBREAK");
+		ds.setDataSourceName("jdbc/xa/distCoffeeDB");
+		Context ctx = new InitialContext();
+		ctx.bind("jdbc/distCoffeeDB", ds);
+	</code>
+	
+	//Use
+	<code>
+		Context ctx = new InitialContext();
+		DataSource ds = (DataSource)ctx.lookup("jdbc/distCoffeesDB");
+		Connection con = ds.getConnection();
+	</code>
 
 
 
