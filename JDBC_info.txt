@@ -101,6 +101,44 @@ A distributed transaction is a transaction that accesses and updates data on two
 		Connection con = ds.getConnection();
 	</code>
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+### ResultSet Interface
 
+# ResultSet Types
+	TYPE_FORWARD_ONLY [default] 	from first to last
+	TYPE_SCROLL_INSENSITIVE 		can be scrolled
+	TYPE_SCROLL_SENSITIVE 
+	
+# ResultSet Concurrency
+	CONCUR_READ_ONLY				The ResultSet object cannot be updated using the ResultSet interface.
+	CONCUR_UPDATABLE				The ResultSet object can be updated using the ResultSet interface.
+	
+# Cursor Holdability
+	HOLD_CURSORS_OVER_COMMIT
+	CLOSE_CURSORS_AT_COMMIT
+	
+# Using Statement Objects for Batch Updates
+	
+	<code>
+		stmt = this.con.createStatement();
+        stmt.addBatch(...);
+        int [] updateCounts = stmt.executeBatch();
+        this.con.commit();
+	</code>
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -	
+
+### Prepared Statements
+
+Has been precompiled, so can be executed RDBM.
+
+	<code>
+		String updateString = "update " + dbName + ".COFFEES " + "set SALES = ? where COF_NAME = ?";
+		updateSales = con.prepareStatement(updateString);
 		
+		updateSales.setInt(1, 100);
+		...
+		updateSales.executeUpdate();
+	</code>
+	
